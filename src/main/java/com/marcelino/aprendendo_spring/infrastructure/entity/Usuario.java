@@ -25,6 +25,7 @@ public class Usuario {
     @Column(name = "senha", length = 10)
     private String senha;
 
+    //chaves estrangeiras
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private List<Endereco> enderecos;
