@@ -11,7 +11,7 @@ import javax.naming.ConfigurationException;
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public Usuario salvarUsuario(Usuario usuario) {
         try {
