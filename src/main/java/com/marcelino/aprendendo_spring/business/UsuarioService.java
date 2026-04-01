@@ -27,7 +27,7 @@ public class UsuarioService {
         try{
             boolean existe = verificaEmailExistente(email);
             if(existe){
-                throw new ConflictException("Email já cadastrado: " + email)
+                throw new ConflictException("Email já cadastrado: " + email);
             }
         }catch(ConflictException e ){
             throw new ConflictException("Email já cadastrado" + e.getCause());

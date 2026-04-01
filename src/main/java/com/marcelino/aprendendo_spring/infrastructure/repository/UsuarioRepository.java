@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+    // spring traduz automaticamente "existsBy" para um select * ... e email;
     boolean existsByEmail(String email);
 }
