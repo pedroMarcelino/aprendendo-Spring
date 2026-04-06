@@ -2,12 +2,11 @@ package com.marcelino.aprendendo_spring.business;
 
 import com.marcelino.aprendendo_spring.infrastructure.entity.Usuario;
 import com.marcelino.aprendendo_spring.infrastructure.exceptions.ConflictException;
+import com.marcelino.aprendendo_spring.infrastructure.exceptions.ResourceNotFoundException;
 import com.marcelino.aprendendo_spring.infrastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.naming.ConfigurationException;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +38,15 @@ public class UsuarioService {
 
     public boolean verificaEmailExistente(String email){
         return  usuarioRepository.existsByEmail(email);
+    }
+
+    public Usuario buscarUsuarioPorEmail(String email){
+        return usuarioRepository.findByEmail(email).orElseThrow(
+                () -> new ResourceNotFoundException("Email não encontrado" + email));
+    }
+
+    public void deletaUsuarioPorEmail(String email){
+        usuarioRepository.deleteByEmail(email);
     }
 
 
