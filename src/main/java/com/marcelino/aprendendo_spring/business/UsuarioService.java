@@ -4,6 +4,7 @@ import com.marcelino.aprendendo_spring.infrastructure.entity.Usuario;
 import com.marcelino.aprendendo_spring.infrastructure.exceptions.ConflictException;
 import com.marcelino.aprendendo_spring.infrastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.naming.ConfigurationException;
@@ -12,10 +13,12 @@ import javax.naming.ConfigurationException;
 @RequiredArgsConstructor
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Usuario salvarUsuario(Usuario usuario) {
         try {
             emailExiste(usuario.getEmail());
+            usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
             return usuarioRepository.save(usuario);
 
         } catch (ConflictException e) {
